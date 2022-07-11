@@ -1,0 +1,234 @@
+// Задача 59: Из двумерного массива целых чисел удалить строку и столбец, на пересечении которых расположен наименьший элемент.
+
+using System;
+using static System.Console;
+using hw10;
+
+Clear();
+
+Write("m = ");
+int m = int.Parse(ReadLine());
+Write("n = ");
+int n = int.Parse(ReadLine());
+WriteLine();
+int[,] mainArray = Class1.GetRandomArray(m, n, -100, 100);
+Class1.printArray(mainArray);
+WriteLine();
+mainArray = dellRowColume(mainArray, findMinID(mainArray));
+Class1.printArray(mainArray);
+
+int[] findMinID (int[,] array)
+{
+    int min     = mainArray[0,0];
+    int[] minID = {0,0};
+    for (int i = 0; i < mainArray.GetLength(0); i++)
+    {
+        for (int j = 0; j < mainArray.GetLength(1); j++)
+        {
+            if (min > mainArray[i,j]) 
+            {
+                min      = mainArray[i,j];
+                minID[0] = i;
+                minID[1] = j;
+            }
+        }
+    }
+    return minID;
+}
+int[,] dellRowColume(int[,] array, int[] minMax)
+{
+    int[,] tempArra = new int[array.GetLength(0) - 1, array.GetLength(1) - 1];
+    int tempI = 0;
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+  
+        if (minMax[0] != i)
+        {
+            int tempJ = 0;
+            for (int j = 0; j < array.GetLength(1); j++)
+            {
+
+                if (minMax[1] != j)
+                {        
+                    tempArra[i - tempI, j - tempJ] = array[i,j];
+                }
+                else
+                {
+                    tempJ = 1;
+                }
+            }
+        }
+        else
+        {
+            tempI = 1;
+        }
+    }
+    return tempArra;
+}
+
+// Задача 61: Показать треугольник Паскаля. *Сделать вывод в виде равнобедренного треугольника.
+using System;
+using static System.Console;
+
+
+Clear();
+
+
+Write("Введите число строк: ");
+int numberLines = int.Parse(ReadLine());
+if (numberLines !=0 )
+{
+    pintTrianglePack(numberLines);
+}
+else
+{
+    WriteLine("Маловато будет");
+}
+void pintTrianglePack(int maxRow)
+{
+    string doubleTab = "\t\t";
+    int maxCol = 2;
+
+    printTab(maxRow);
+    WriteLine("1");
+    if (maxRow == 1) return;
+    printTab(maxRow - 1);
+    Write("1");
+    Write(doubleTab);
+    Write("1");
+    WriteLine();
+    if (maxRow == 2) return;
+    for (int numRow = 2; numRow < maxRow; numRow++)
+    {
+        printTab(maxRow - numRow);
+        Write("1");
+        Write(doubleTab);
+        for (int numCol = 1; numCol < maxCol; numCol++)
+        {
+            Write(getCkn(numRow, numCol));
+            Write(doubleTab);
+        }
+        maxCol++;
+        Write("1");
+        WriteLine();
+    }
+}
+
+void printTab(int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        Write("\t");
+    }
+}
+
+int getCkn(int n, int k)
+{
+    return Factorial(n) / (Factorial(k) * (Factorial(n - k)));
+}
+
+int Factorial (int num)
+{
+    if (num == 1) return 1;
+
+    return num * Factorial(num - 1);
+}
+
+// Доп. Даны две строки. Определить можно ли из символов первой строки, собрать вторую. 
+// Допускается любое количество пробелов. Регистр символов различный в любой последовательности.
+// Пример:
+// Строка 1. Tom Marvolo Riddle
+// Строка 2. I am Lord Voldemort
+// Ответ: Да
+// Строка 1. Tom Marvolo Riddle
+// Строка 2. Lord Voldemort
+// Ответ: Нет - остались свободные символы.
+
+using System;
+using static System.Console;
+using hw10;
+
+Clear();
+
+Write("Введите первою строчку: ");
+string firstRow  = ReadLine();
+Write("Введите вторую строчку: ");
+string secondRow = ReadLine();
+
+string firstRowNoSeparete  = dellSpacer(firstRow);  // Удаляем пробелы из строк
+string secondRowNoSeparete = dellSpacer(secondRow); // Удаляем пробелы из строк
+
+firstRowNoSeparete.ToLower();  // Приводим все к одному регистру
+secondRowNoSeparete.ToLower(); // Приводим все к одному регистру
+
+WriteLine (chekRow(firstRowNoSeparete, secondRowNoSeparete) ? "Ответ: Да" : "Ответ: Нет - остались свободные символы.");
+
+bool chekRow(string firstRow, string secondRow)
+{
+  bool resut = true;
+  int[] numersUseSymbols = new int[secondRow.Length];     // Создаем массив с результатами поиска "-1" -элемент не найден
+  for (int i = 0; i < numersUseSymbols.GetLength(0); i++) // Инициализируем массив "-1" -элемент не найден
+  {
+    numersUseSymbols[i] = -1;
+  } 
+  int countSybols = 0;
+
+  for (int i = 0; i < secondRow.Length; i++)
+  {
+    if (secondRow[i] != ' ')
+    {
+      int countTry = 0;
+      do
+      {
+        if (findSymbole(firstRow, secondRow[i], countTry))
+        {
+          if (!findNum(numersUseSymbols, countTry))
+          {
+            numersUseSymbols[countSybols] = countTry;
+            countSybols++;
+          }
+        }
+        countTry++;
+      }
+      while (secondRow.Length > countTry);
+    }
+  }
+
+  for (int i = 0; i < numersUseSymbols.GetLength(0); i++)
+  {
+    if (numersUseSymbols[i] == -1) return false;
+  }
+  return true;
+}
+
+
+bool findSymbole(string str,  char findIt, int startFind)
+{
+  for (int i = startFind; i < str.Length; i++)
+  {
+    if (str[i] == findIt) return true; 
+  }
+  return false;
+}
+
+bool findNum(int[] array,  int findIt)
+{
+  for (int i = 0; i < array.Length; i++)
+  {
+    if (array[i] == findIt) return true; 
+  }
+  return false;
+}
+
+string dellSpacer (string str)
+{
+  string resulrStr = "";
+  for (int i = 0; i < str.Length; i++)
+  {
+    if (str[i] != ' ') 
+    {
+      resulrStr += str[i];
+    }
+  }
+  return resulrStr;
+}

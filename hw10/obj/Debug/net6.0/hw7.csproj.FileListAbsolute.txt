@@ -1,0 +1,12 @@
+D:\!Project\C#\HW7\hw7\bin\Debug\net6.0\hw7.deps.json
+D:\!Project\C#\HW7\hw7\bin\Debug\net6.0\hw7.dll
+D:\!Project\C#\HW7\hw7\bin\Debug\net6.0\hw7.pdb
+D:\!Project\C#\HW7\hw7\obj\Debug\net6.0\hw7.csproj.AssemblyReference.cache
+D:\!Project\C#\HW7\hw7\obj\Debug\net6.0\hw7.GeneratedMSBuildEditorConfig.editorconfig
+D:\!Project\C#\HW7\hw7\obj\Debug\net6.0\hw7.AssemblyInfoInputs.cache
+D:\!Project\C#\HW7\hw7\obj\Debug\net6.0\hw7.AssemblyInfo.cs
+D:\!Project\C#\HW7\hw7\obj\Debug\net6.0\hw7.csproj.CoreCompileInputs.cache
+D:\!Project\C#\HW7\hw7\obj\Debug\net6.0\hw7.dll
+D:\!Project\C#\HW7\hw7\obj\Debug\net6.0\refint\hw7.dll
+D:\!Project\C#\HW7\hw7\obj\Debug\net6.0\hw7.pdb
+D:\!Project\C#\HW7\hw7\obj\Debug\net6.0\ref\hw7.dll

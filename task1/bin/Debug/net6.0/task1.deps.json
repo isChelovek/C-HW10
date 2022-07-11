@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "task1/1.0.0": {
+        "dependencies": {
+          "hw10": "1.0.0"
+        },
+        "runtime": {
+          "task1.dll": {}
+        }
+      },
+      "hw10/1.0.0": {
+        "runtime": {
+          "hw10.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "task1/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "hw10/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
